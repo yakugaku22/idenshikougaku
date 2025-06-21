@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>遺伝子クイズ 第1回</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>遺伝子工学クイズ【第1回】</h1>
+
+  <div id="mode-select">
+    <button onclick="startQuiz()">クイズを開始</button>
+  </div>
+
+  <div id="quiz-area" class="hidden">
+    <img id="structure-img" class="hidden" alt="図があれば表示されます">
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="feedback"></div>
+    <button onclick="nextQuestion()">次の問題へ</button>
+  </div>
+
+  <div id="result" class="hidden"></div>
+  <button id="restart-btn" class="hidden" onclick="goToStart()">最初に戻る</button>
+  <button id="review-btn" class="hidden" onclick="startReview()">復習モード</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
