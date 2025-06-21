@@ -21,7 +21,7 @@ button:hover {
 }
 
 img {
-  max-width: 90%;
+  max-width: 50%;
   height: auto;
   margin: 20px auto;
 }
@@ -57,6 +57,22 @@ img {
   background-color: #5aad5e;
 }
 
+.correct {
+  color: blue;
+  font-weight: bold;
+}
+
+.incorrect {
+  color: red;
+  font-weight: bold;
+}
+
+#progress {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
 @media screen and (max-width: 600px) {
   #question {
     font-size: 0.95rem;
@@ -73,10 +89,12 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
 
-  @media screen and (max-width: 500px) {
-    h1 {
-      font-size: 1.3rem;
-    }
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 1.3rem;
   }
 }
+
+ 
