@@ -1,12 +1,15 @@
-let quizData;
+ let quizData;
 let allData;
 let currentIndex = 0;
 let score = 0;
 let answered = false;
 let wrongAnswers = [];
 let isReviewMode = false;
+let currentFile = "";
 
 function startQuiz() {
+  const selected = document.getElementById('quiz-select').value;
+  currentFile = selected;
   score = 0;
   currentIndex = 0;
   answered = false;
@@ -19,18 +22,31 @@ function startQuiz() {
   document.getElementById('review-btn').classList.add('hidden');
   document.getElementById('feedback').textContent = "";
 
-  fetch('quiz_dai1kai.json')
+  fetch(currentFile)
     .then(res => res.json())
     .then(data => {
       allData = data;
       quizData = [...allData];
+      if (!quizData.length) {
+        alert("問題データが空です。JSONの読み込みに失敗している可能性があります。");
+        return;
+      }
       shuffleArray(quizData);
       showQuestion();
+    })
+    .catch(err => {
+      console.error("JSON読み込みエラー:", err);
+      alert("問題の読み込みに失敗しました。ファイル名または構文を確認してください。");
     });
 }
 
 function showQuestion() {
   const quiz = quizData[currentIndex];
+  if (!quiz) {
+    console.error("問題が読み込めませんでした。quizDataが空か、インデックスが範囲外です。");
+    return;
+  }
+
   const questionElem = document.getElementById('question');
   const optionsDiv = document.getElementById('options');
   const imageElem = document.getElementById('structure-img');
@@ -85,6 +101,8 @@ function nextQuestion() {
 function pauseQuiz() {
   document.getElementById('quiz-area').classList.add('hidden');
   document.getElementById('mode-select').classList.remove('hidden');
+  document.getElementById('result').classList.remove('hidden');
+  document.getElementById('result').textContent = `途中中断：${currentIndex}問中${score}問正解でした。`;
 }
 
 function showResult() {
