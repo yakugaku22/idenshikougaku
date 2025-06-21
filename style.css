@@ -21,6 +21,16 @@ button:hover {
   background-color: #5a9bd4;
 }
 
+.selected-answer {
+  background-color: #87ceeb !important;
+  color: black;
+}
+
+.selected-wrong {
+  background-color: #f08080 !important;
+  color: white;
+}
+
 img {
   max-width: 50%;
   height: auto;
