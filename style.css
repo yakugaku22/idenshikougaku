@@ -3,11 +3,12 @@ body {
   text-align: center;
   background: #f0f8ff;
   padding: 20px;
+  font-size: 18px;
 }
 
 button {
   margin: 8px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
   border: none;
   background-color: #4682b4;
@@ -27,7 +28,7 @@ img {
 }
 
 #question {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
@@ -36,6 +37,11 @@ img {
   margin: 8px auto;
   width: 90%;
   max-width: 400px;
+}
+
+#progress {
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .hidden {
@@ -58,28 +64,41 @@ img {
 }
 
 .correct {
-  color: blue;
+  color: #1e90ff;
   font-weight: bold;
 }
 
 .incorrect {
-  color: red;
+  color: #e63946;
   font-weight: bold;
 }
 
-#progress {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #333;
+.result-box {
+  color: #e63946;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 600px) {
+  body {
+    font-size: 20px;
+  }
+
   #question {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
 
   #options button {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   h1 {
@@ -89,12 +108,13 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
 
-@media screen and (max-width: 500px) {
-  h1 {
-    font-size: 1.3rem;
+  .button-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #structure-img {
+    max-width: 80%;
   }
 }
-
- 
