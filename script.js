@@ -1,4 +1,4 @@
- let quizData;
+let quizData;
 let allData;
 let currentIndex = 0;
 let score = 0;
@@ -6,6 +6,7 @@ let answered = false;
 let wrongAnswers = [];
 let isReviewMode = false;
 let currentFile = "";
+let selectedAnswers = [];
 
 function startQuiz() {
   const selected = document.getElementById('quiz-select').value;
@@ -42,10 +43,10 @@ function startQuiz() {
 
 function showQuestion() {
   const quiz = quizData[currentIndex];
-  if (!quiz) {
-    console.error("問題が読み込めませんでした。quizDataが空か、インデックスが範囲外です。");
-    return;
-  }
+  if (!quiz) return;
+
+  selectedAnswers = [];
+  answered = false;
 
   const questionElem = document.getElementById('question');
   const optionsDiv = document.getElementById('options');
@@ -56,7 +57,6 @@ function showQuestion() {
   optionsDiv.innerHTML = '';
   document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = '';
-  answered = false;
 
   if (quiz.image) {
     imageElem.src = quiz.image;
@@ -73,20 +73,39 @@ function showQuestion() {
     btn.textContent = option;
     btn.onclick = () => {
       if (answered) return;
-      answered = true;
-      if (correctAnswers.includes(option)) {
+
+      if (selectedAnswers.includes(option)) return;
+
+      if (!correctAnswers.includes(option)) {
+        document.getElementById('feedback').textContent = `不正解... 正解は：${correctAnswers.join(" / ")}`;
+        document.getElementById('feedback').className = "incorrect";
+        btn.classList.add("selected-wrong");
+        answered = true;
+        wrongAnswers.push(quiz);
+        disableAllButtons();
+        return;
+      }
+
+      selectedAnswers.push(option);
+      btn.classList.add("selected-answer");
+      btn.disabled = true;
+
+      const allCorrectSelected = correctAnswers.every(ans => selectedAnswers.includes(ans));
+      if (allCorrectSelected) {
         document.getElementById('feedback').textContent = "正解！";
         document.getElementById('feedback').className = "correct";
         score++;
-      } else {
-        document.getElementById('feedback').textContent = `不正解... 正解は：${correctAnswers.join(" / ")}`;
-        document.getElementById('feedback').className = "incorrect";
-        wrongAnswers.push(quiz);
+        answered = true;
+        disableAllButtons();
       }
-      Array.from(optionsDiv.children).forEach(b => b.disabled = true);
     };
     optionsDiv.appendChild(btn);
   });
+}
+
+function disableAllButtons() {
+  const buttons = document.getElementById('options').querySelectorAll('button');
+  buttons.forEach(b => b.disabled = true);
 }
 
 function nextQuestion() {
@@ -151,3 +170,5 @@ function shuffleArray(array) {
   }
   return array;
 }
+
+  
