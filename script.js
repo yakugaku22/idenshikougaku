@@ -36,11 +36,12 @@ function showQuestion() {
   const imageElem = document.getElementById('structure-img');
 
   questionElem.textContent = `Q${currentIndex + 1}. ${quiz.question}`;
+  document.getElementById('progress').textContent = `(${currentIndex + 1} / ${quizData.length})`;
   optionsDiv.innerHTML = '';
   document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').className = '';
   answered = false;
 
-  // 図があるかどうか
   if (quiz.image) {
     imageElem.src = quiz.image;
     imageElem.classList.remove('hidden');
@@ -59,9 +60,11 @@ function showQuestion() {
       answered = true;
       if (correctAnswers.includes(option)) {
         document.getElementById('feedback').textContent = "正解！";
+        document.getElementById('feedback').className = "correct";
         score++;
       } else {
         document.getElementById('feedback').textContent = `不正解... 正解は：${correctAnswers.join(" / ")}`;
+        document.getElementById('feedback').className = "incorrect";
         wrongAnswers.push(quiz);
       }
       Array.from(optionsDiv.children).forEach(b => b.disabled = true);
@@ -77,6 +80,11 @@ function nextQuestion() {
   } else {
     showResult();
   }
+}
+
+function pauseQuiz() {
+  document.getElementById('quiz-area').classList.add('hidden');
+  document.getElementById('mode-select').classList.remove('hidden');
 }
 
 function showResult() {
