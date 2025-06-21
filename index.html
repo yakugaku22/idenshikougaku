@@ -2,42 +2,37 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>遺伝子クイズ 第1回</title>
+  <title>遺伝子工学クイズ</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .correct {
-      color: blue;
-      font-weight: bold;
-    }
-    .incorrect {
-      color: red;
-      font-weight: bold;
-    }
-    img {
-      max-width: 50%;
-      height: auto;
-      margin: 20px auto;
-    }
-  </style>
 </head>
 <body>
-  <h1>遺伝子工学クイズ【第1回】</h1>
+  <h1>遺伝子工学クイズ</h1>
 
   <div id="mode-select">
+    <label for="quiz-select">クイズ回数を選んでね：</label>
+    <select id="quiz-select">
+      <option value="quiz_dai1kai.json">第1回</option>
+      <option value="quiz_dai2kai.json">第2回</option>
+      <option value="quiz_dai3kai.json">第3回</option>
+    </select>
+    <br><br>
     <button onclick="startQuiz()">クイズを開始</button>
   </div>
 
   <div id="quiz-area" class="hidden">
+    <div id="progress"></div>
     <img id="structure-img" class="hidden" alt="図があれば表示されます">
     <div id="question"></div>
     <div id="options"></div>
     <div id="feedback"></div>
-    <div id="progress"></div>
-    <button onclick="nextQuestion()">次の問題へ</button>
-    <button onclick="pauseQuiz()">中断する</button>
+
+    <div class="button-row">
+      <button onclick="pauseQuiz()">中断する</button>
+      <button onclick="nextQuestion()">次の問題へ</button>
+    </div>
   </div>
 
-  <div id="result" class="hidden"></div>
+  <div id="result" class="hidden result-box"></div>
   <button id="restart-btn" class="hidden" onclick="goToStart()">最初に戻る</button>
   <button id="review-btn" class="hidden" onclick="startReview()">復習モード</button>
 
