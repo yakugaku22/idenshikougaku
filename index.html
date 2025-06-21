@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <title>遺伝子クイズ 第1回</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .correct {
+      color: blue;
+      font-weight: bold;
+    }
+    .incorrect {
+      color: red;
+      font-weight: bold;
+    }
+    img {
+      max-width: 50%;
+      height: auto;
+      margin: 20px auto;
+    }
+  </style>
 </head>
 <body>
   <h1>遺伝子工学クイズ【第1回】</h1>
@@ -17,7 +32,9 @@
     <div id="question"></div>
     <div id="options"></div>
     <div id="feedback"></div>
+    <div id="progress"></div>
     <button onclick="nextQuestion()">次の問題へ</button>
+    <button onclick="pauseQuiz()">中断する</button>
   </div>
 
   <div id="result" class="hidden"></div>
