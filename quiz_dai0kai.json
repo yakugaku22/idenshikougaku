@@ -209,7 +209,7 @@
   },
   {
     "question": "チミンの構造はどれか。",
-    "img": "q18.jpg"
+    "image": "q18.jpg"
     "choices": [
       "構造1",
       "構造2",
